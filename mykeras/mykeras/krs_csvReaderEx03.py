@@ -6,13 +6,13 @@ from keras.models import Sequential
 from keras.layers import Dense
 import numpy as np
 
-from mykeras.myfunction import xxx 
+from mykeras.mykeras.myfunction import getDataSet
 
 filename = './score2.csv'
 # loadtxt : 데이터를 튜플 형식으로 반환해준다.
 data = np.loadtxt(filename, dtype=np.float32, delimiter=',')
 
-x_train, x_test, y_train, y_test = xxx(data = data, testing_row = 5)
+x_train, x_test, y_train, y_test = getDataSet(data = data, testing_row = 5)
 
 model = Sequential()
 

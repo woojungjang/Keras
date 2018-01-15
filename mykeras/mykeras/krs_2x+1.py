@@ -12,7 +12,7 @@ model = Sequential()
 
 # Sequential: 선형으로 만든 layer
 # add() 메소드를 이용하여 필요한 연산을 추가한다. 
-# Dense: NN Layer를 조밀하게 연결시켜 응축해주는 역할
+# Dense: NN Layer를 조밀하게 연결시켜 응축해주는 역할 
 # Dense는 Core layer에서 검색바람
     # input_dim: 입력의 차원
     # activation: 활성화 함수 지정

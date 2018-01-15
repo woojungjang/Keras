@@ -1,5 +1,9 @@
-def xxx(data, testing_row = 5):
+from keras.utils import np_utils
+
+def getDataSet(data, testing_row=5, one_hot = False, num_classes = -1): 
     # data.shape는 tuple 자료형인데, 인덱싱이 가능하다.
+    # one_hot: 원핫인코딩 여부 지정, False면 하지 않겠다.
+    # num_classes 클래스갯수
     table_row = data.shape[0]
     print(table_row)
     
@@ -17,7 +21,13 @@ def xxx(data, testing_row = 5):
     x_train = data[ 0:training_row, 0:x_column ]
     y_train = data[ 0:training_row, x_column:(x_column+1) ]
     
-    x_test  = data[training_row:, 0:x_column ]
+    if one_hot == False:
+        pass
+    else: # one hot 인코딩이 필요한 경우
+        if num_classes >= 1 : 
+            y_train = np_utils.to_categorical(y_train, num_classes)
+    
+    x_test  = data[training_row:,0:x_column ]
     y_test  = data[training_row:, x_column:(x_column+1) ]
     
     return x_train, x_test, y_train, y_test
