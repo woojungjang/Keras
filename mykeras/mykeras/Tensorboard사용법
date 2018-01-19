@@ -1,0 +1,7 @@
+>cmd  
+>cd C:\myjupyter
+write directory where log file is > C:\Users\acorn\eclipse-workspace\Keras\myKeras
+>tensorboard --logdir=path/to/logs/directory
+>tensorboard --logdir=/logs
+
+explorer window> http://acorn-PC:6006
