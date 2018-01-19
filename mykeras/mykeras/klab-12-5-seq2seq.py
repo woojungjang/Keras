@@ -14,7 +14,10 @@ from keras.utils.vis_utils import plot_model
 digit = "0123456789"
 alpha = "abcdefghij"
 
+# char_set 각 숫자하나 문자하나가 리스트 형태로 쪼개짐 
 char_set = list(set(digit + alpha))  # id -> char
+
+# 글자(숫자형 글자) 1개와 인덱스번호 1개를 가지고 있는 사전
 char_dic = {w: i for i, w in enumerate(char_set)}
 
 data_dim = len(char_set)  # one hot encoding size
@@ -25,8 +28,14 @@ num_classes = len(char_set)
 dataX = []
 dataY = []
 
+# for i in range(4):
+#     print( digit[i])
+#     print( alpha[i])
+    
+print('------')
+
 for i in range(1000):
-    rand_pick = np.random.choice(10, 7)
+    rand_pick = np.random.choice(10, 7) # 0-9까지 숫자중에서 임으로 7개 뽑아냄
     x = [char_dic[digit[c]] for c in rand_pick]
     y = [char_dic[alpha[c]] for c in rand_pick]
     dataX.append(x)
@@ -54,8 +63,11 @@ model = Sequential()
 model.add(LSTM(32, input_shape=(time_steps, data_dim), return_sequences=False))
 
 # For the decoder's input, we repeat the encoded input for each time step
-model.add(RepeatVector(time_steps))
+model.add(RepeatVector(time_steps)) # RepeatVector: 압력을 time_steps번 반복하겠다.
+
+# 디코더 RNN은 단층 또는 다층이 될수있다.
 # The decoder RNN could be multiple layers stacked or a single layer
+
 
 model.add(LSTM(32, return_sequences=True))
 
@@ -94,8 +106,7 @@ predictions = model.predict(testX, verbose=0)
 for i, prediction in enumerate(predictions):
     # print(prediction)
     x_index = np.argmax(testX[i], axis=1)
-    x_str = [char_set[j] for j in x_index]
-
+    x_str = [char_set[j] for j in x_index] 
     index = np.argmax(prediction, axis=1)
     result = [char_set[j] for j in index]
 

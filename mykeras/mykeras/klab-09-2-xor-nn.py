@@ -12,7 +12,11 @@ y_data = [[0.],
           [0.]]
 
 model = Sequential()
+
+# 히든 1 층
 model.add(Dense(2, input_dim=2, activation='sigmoid'))
+
+# 출력층
 model.add(Dense(1, activation='sigmoid'))
 sgd = SGD(lr=0.1)
 model.compile(loss='binary_crossentropy', optimizer=sgd,

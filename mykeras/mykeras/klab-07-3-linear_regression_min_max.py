@@ -36,6 +36,13 @@ history = model.fit(x_data, y_data, epochs=100)
 
 predictions = model.predict(x_data)
 score = model.evaluate(x_data, y_data)
+#https://keras.io/models/sequential/#sequential-model-methods
+#evaluate(self, x=None, y=None, batch_size=None, verbose=1, sample_weight=None, steps=None)
+#x y
+#batch default 32
+#sample_weight가 w
+
+
 
 print('Prediction: \n', predictions)
 print('Cost: ', score[0])

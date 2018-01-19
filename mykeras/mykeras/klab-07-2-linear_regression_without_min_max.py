@@ -1,3 +1,7 @@
+# http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.MinMaxScaler.html
+# X_std = (X - X.min(axis=0)) / (X.max(axis=0) - X.min(axis=0))
+# X_scaled = X_std * (max - min) + min
+
 from keras.models import Sequential
 from keras.layers import Dense, Activation
 from keras.optimizers import SGD
@@ -17,8 +21,11 @@ xy = np.array([[828.659973, 833.450012, 908100, 828.349976, 831.659973],
 x_data = xy[:, 0:-1]
 y_data = xy[:, [-1]]
 
+inputDim = x_data.shape[1]
+myUnit = y_data.shape[1]
+
 model = Sequential()
-model.add(Dense(1, input_dim=4))
+model.add(Dense(units = myUnit, input_dim=inputDim))
 model.add(Activation('linear'))
 
 model.summary()
@@ -30,7 +37,10 @@ model.compile(loss='mse',
 history = model.fit(x_data, y_data, epochs=100)
 
 predictions = model.predict(x_data)
+
+#evaluate: 입력 데이터에 대하여 일괄 처리 단위로 손실 함수 결과와 정확도를 반환해준다.
 score = model.evaluate(x_data, y_data)
 
 print('Prediction: ', predictions)
+print('Cost', score[0])
 print('Accuracy: ', score[1])

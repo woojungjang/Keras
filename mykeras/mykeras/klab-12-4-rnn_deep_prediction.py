@@ -45,8 +45,10 @@ trainY, testY = np.array(dataY[0:train_size]), np.array(
     dataY[train_size:len(dataY)])
 
 model = Sequential()
-model.add(LSTM(5, input_shape=(timesteps, data_dim), return_sequences=True))
-model.add(Dropout(0.2))
+model.add(LSTM(5, input_shape=(timesteps, data_dim), return_sequences=True)) 
+# LSTM unit=5 아웃풋
+model.add(Dropout(0.2)) # 뉴런이 하나빠질때마다 20%감소 오버피팅 방지하고자 함 
+# 몇번째 가지가 빠지는지는 모름 랜덤하게 빠짐. 전문가한테 물어서 빠지는 기법이 앙상블
 model.add(LSTM(10, return_sequences=False))
 model.add(Dense(1))
 model.add(Activation('linear'))
@@ -55,7 +57,7 @@ model.summary()
 
 # Store model graph in png
 # (Error occurs on in python interactive shell)
-plot_model(model, to_file=os.path.basename(__file__) + '.png', show_shapes=True)
+# plot_model(model, to_file=os.path.basename(__file__) + '.png', show_shapes=True)
 
 model.compile(loss='mean_squared_error', optimizer='adam')
 
